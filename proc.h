@@ -49,6 +49,8 @@ struct proc {
   struct file *ofile[NOFILE];  // Open files
   struct inode *cwd;           // Current directory
   char name[16];               // Process name (debugging)
+  // tarea 2 - lottery schedule
+  int tickets;
 };
 
 // Process memory is laid out contiguously, low addresses first:
@@ -56,3 +58,6 @@ struct proc {
 //   original data and bss
 //   fixed-size stack
 //   expandable heap
+
+// tarea 1 & 2 - explicit declaration of syscall
+int getprocs(void);

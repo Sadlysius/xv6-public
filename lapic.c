@@ -227,3 +227,15 @@ cmostime(struct rtcdate *r)
   *r = t1;
   r->year += 2000;
 }
+
+// tarea 2 - simple unix time for pseudo-RNG seeding purposes
+unsigned long unixtime(void) {
+  struct rtcdate t;
+  cmostime(&t);
+  return ((t.year - 1970) * 365 * 24 * 60 * 60) +
+         (t.month * 30 * 24 * 60 * 60) +
+         (t.day * 24 * 60 * 60) +
+         (t.hour * 60 * 60) +
+         (t.minute * 60) +
+         (t.second);
+}

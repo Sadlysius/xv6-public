@@ -90,23 +90,17 @@ sys_uptime(void)
   return xticks;
 }
 
-
-// return number of processes running
-struct {
-  struct proc proc[NPROC];
-} ptable;
-
+// tarea 1 - wrapper (system) function for getprocs().
 int
-sys_getprocs()
+sys_getprocs(void)
 {
-  int counter = 0;
-  struct proc *p;
+  return getprocs();
+}
 
-  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
-    if(p->state != UNUSED) {
-      counter++;
-    }
-  }
-    
-  return counter;
+// tarea 2 - request lottery schedule tickets syscall.
+// (función sin terminar, pero debería aceptar pid y número de tickets, luego hacer un loop en la tabla de procesos y cambiar ->tickets al argumento dado)
+int 
+sys_reqtickets(int tickets)
+{
+  return 0;
 }
