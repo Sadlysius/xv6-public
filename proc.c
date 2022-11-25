@@ -590,3 +590,32 @@ int getprocs(void) {
   return counter;
 
 }
+
+// tarea 4 - creditos parciales a https://stackoverflow.com/questions/39969116/how-to-get-the-page-directory-of-a-pointer-in-xv6
+int getphysaddr(char *vaddr) {
+  cprintf("virtual address to translate: 0x%p\n", vaddr);
+  int* paddr;
+  pde_t * pgdir;
+  pte_t * pgtab;
+  pde_t * pde;
+  pte_t * pte;
+
+  struct proc *curproc = myproc();
+  pgdir = curproc->pgdir;
+  cprintf("pd base is located at: 0x%p\n", pgdir);
+  pde = &pgdir[PDX(vaddr)];
+  if ( *pde & PTE_P) {
+    pgtab = (pte_t * ) P2V(PTE_ADDR( * pde));
+  } else {
+    cprintf("pte not present\n");
+    return -1;
+  }
+  cprintf("pde = %p\n", (void *)*pde);
+  cprintf("PTE_P = %d\n", PTE_P);  
+  pte = & pgtab[PTX(vaddr)];
+  paddr = (int *)V2P(PTE_ADDR(*pte));
+  cprintf("the virtual address is 0x%p\n", vaddr);
+  cprintf("the physical address is 0x%p\n", (void *)paddr);
+
+  return 0;
+}

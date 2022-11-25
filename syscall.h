@@ -23,4 +23,5 @@
     // custom syscalls:
 #define SYS_getprocs    22
 #define SYS_reqtickets  23
+#define SYS_getphysaddr 24
 

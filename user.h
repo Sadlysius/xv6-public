@@ -25,6 +25,7 @@ int sleep(int);
 int uptime(void);
 int getprocs(void);
 int reqtickets(int);
+int getphysaddr(char*);
 
 // ulib.c
 int stat(const char*, struct stat*);

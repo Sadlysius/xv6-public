@@ -104,3 +104,12 @@ sys_reqtickets(int tickets)
 {
   return 0;
 }
+
+int
+sys_getphysaddr(char *s)
+{
+  argstr(0, &s);
+  cprintf("[syscall] calling getphysaddr...\n");
+  getphysaddr(s);
+  return 0;
+}
